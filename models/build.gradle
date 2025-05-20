@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
-    namespace 'org.emstrack.ambulance'
+    namespace 'org.emstrack.models'
 
     defaultConfig {
         minSdkVersion 17
