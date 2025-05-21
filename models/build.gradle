@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdk 35
     namespace 'org.emstrack.models'
 
     defaultConfig {

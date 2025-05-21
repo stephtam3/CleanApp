@@ -359,20 +359,20 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
             Intent notificationIntent = new Intent(AmbulanceForegroundService.this, LoginActivity.class);
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(AmbulanceForegroundService.this, 0,
-                    notificationIntent, 0);
+                    notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
             // Restart intent
             Intent restartServiceIntent = new Intent(AmbulanceForegroundService.this, LoginActivity.class);
             restartServiceIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             restartServiceIntent.setAction(LoginActivity.LOGOUT);
             PendingIntent restartServicePendingIntent = PendingIntent.getActivity(AmbulanceForegroundService.this, 0,
-                    restartServiceIntent, 0);
+                    restartServiceIntent, PendingIntent.FLAG_IMMUTABLE);
 
             // Stop intent
             Intent stopServiceIntent = new Intent(AmbulanceForegroundService.this, AmbulanceForegroundService.class);
             stopServiceIntent.setAction(Actions.STOP_SERVICE);
             PendingIntent stopServicePendingIntent = PendingIntent.getService(AmbulanceForegroundService.this, 0,
-                    stopServiceIntent, 0);
+                    stopServiceIntent, PendingIntent.FLAG_IMMUTABLE);
 
             // Icon
             Bitmap icon = BitmapFactory.decodeResource(getResources(),
