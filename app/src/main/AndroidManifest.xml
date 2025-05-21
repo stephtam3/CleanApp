@@ -14,6 +14,8 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
         android:name=".AmbulanceApp"
         android:allowBackup="true"
@@ -25,6 +27,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="org.emstrack.ambulance.LoginActivity"
+            android:exported="true"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
