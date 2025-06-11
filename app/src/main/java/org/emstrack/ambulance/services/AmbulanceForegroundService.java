@@ -45,7 +45,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.Ack;
+import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.emstrack.ambulance.LoginActivity;
 import org.emstrack.ambulance.R;
@@ -513,8 +514,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setAutoCancel(true);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
-                    notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+                    //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
+                    //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                    sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
                     // Broadcast failure
                     broadcastFailure(extras, uuid);
@@ -556,8 +559,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setAutoCancel(true);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
-                    notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+//                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
+//                    notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                    sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
                     // Broadcast failure
                     broadcastFailure(extras, uuid);
@@ -935,7 +940,7 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
             String clientId = context.getString(R.string.client_name) + "_"
                     + context.getString(R.string.app_version) + "_"
                     + deviceAppUID;
-            MqttAndroidClient androidClient = new MqttAndroidClient(context, _serverUri, clientId);
+            MqttAndroidClient androidClient = new MqttAndroidClient(context, _serverUri, clientId, Ack.AUTO_ACK, null, false, 1000);
             client = new MqttProfileClient(androidClient);
 
         }
@@ -1297,7 +1302,7 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
         // Log and build a notification in case of error
         Log.i(TAG, message);
 
-        // Create notification
+//        // Create notification
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("EMSTrack")
@@ -1305,8 +1310,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//        notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+        sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
         // and return false
         return false;
@@ -1353,8 +1360,11 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                                 getString(R.string.restartText), stopServicePendingIntent)
                         .build();
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, notification);
+        //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        //notificationManager.notify(NOTIFICATION_ID, notification);
+
+        sendNotification(NOTIFICATION_ID, notification);
+
 
     }
 
@@ -1564,9 +1574,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+        //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
 
+        sendNotification(notificationId.getAndIncrement(), mBuilder.build());
     }
 
     /**
@@ -1768,8 +1779,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                     .setAutoCancel(true);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
-                    notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+                    //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
+                    //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                    sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
                 }
 
@@ -1839,8 +1852,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+        //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+        sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
         return;
 
@@ -1865,8 +1880,10 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setAutoCancel(true);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
-                    notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+                    //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
+                    //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                    sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
                 });
 
@@ -3060,9 +3077,11 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                                             .setDefaults(Notification.DEFAULT_ALL)
                                             .setContentIntent(pendingIntent);
 
-                            NotificationManagerCompat notificationManager
-                                    = NotificationManagerCompat.from(this);
-                            notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+                            //NotificationManagerCompat notificationManager
+                            //        = NotificationManagerCompat.from(this);
+                            //notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                            sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
 
                             // Broadcast new video call
@@ -4395,9 +4414,11 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
                                 .setDefaults(Notification.DEFAULT_ALL)
                                 .setContentIntent(pendingIntent);
 
-                NotificationManagerCompat notificationManager
-                        = NotificationManagerCompat.from(this);
-                notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+//                NotificationManagerCompat notificationManager
+//                        = NotificationManagerCompat.from(this);
+//                notificationManager.notify(notificationId.getAndIncrement(), mBuilder.build());
+
+                sendNotification(notificationId.getAndIncrement(), mBuilder.build());
 
                 // create intent to prompt user
                 Intent callPromptIntent = new Intent(BroadcastActions.PROMPT_CALL_ACCEPT);
@@ -4953,8 +4974,8 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
 
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
         // calling addGeofences() and removeAllGeofences().
-        geofenceIntent = PendingIntent.getBroadcast(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        geofenceIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
 
         return geofenceIntent;
     }
@@ -5345,5 +5366,17 @@ public class  AmbulanceForegroundService extends BroadcastService implements Mqt
         sendBroadcastWithUUID(localIntent, uuid);
 
     }
-
+    public void sendNotification(final int id, final Notification notification) {
+        // Check if permission is granted
+            // Permission is granted, proceed with the action
+            try {
+                // ... your code that requires location permission ...
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(AmbulanceForegroundService.this);
+                notificationManager.notify(id, notification);
+            }
+            catch (SecurityException e) {
+                // Handle SecurityException (e.g., show an error message to the user)
+                e.printStackTrace();
+            }
+    }
 }
